@@ -20,4 +20,7 @@ make
 make install
 popd
 
+# Remove tmp files
+rm zeromq-2.1.7* -rf
+
 exit 0
