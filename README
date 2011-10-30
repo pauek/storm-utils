@@ -1,0 +1,14 @@
+
+Quick hack to install STORM in a VirtualBox cluster 
+(you'd better have a Core i7 with lots of RAM)
+
+1. Install an Ubuntu Server 10.04 LTS as a VirtualBox Guest
+2. download 'storm-utils'.
+3. Execute scripts 01 through 05:
+4. Clone the virtual machines in "link mode" (now you'll have STORM in all of them).
+5. Execute script 06 in each node:
+ 
+   > sudo ./06-config-zookeeper-node.sh n 3  # where 'n' is the node number, and 
+                                             # 3 is the total number of VMs
+
+The addresses are 192.168.1.200 + i, with i = 1, 2, 3, 4, 5, 6, ... please don't ask why.
