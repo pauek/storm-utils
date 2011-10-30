@@ -6,8 +6,7 @@ if [ $(whoami) != "root" ]; then
 fi
 
 # Download needed packages
-apt-get install build-essential
-apt-get install uuid-dev
+apt-get install -y build-essential uuid-dev
 
 # Download zeromq
 wget http://download.zeromq.org/historic/zeromq-2.1.7.tar.gz
