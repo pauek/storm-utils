@@ -17,7 +17,8 @@ MAX=$2
 INTERFACE=$3
 
 if [ -z $INTERFACE ]; then
-  INTERFACE="eth0"
+  # Attempt auto-detection
+  INTERFACE=$(ifconfig -a -s | grep eth | cut -d' ' -f1)
 fi
 
 #
