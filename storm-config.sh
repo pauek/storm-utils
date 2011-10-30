@@ -7,7 +7,7 @@ GATEWAY="192.168.1.1"
 
 # Parse command line
 
-if [ -z "$1" ]; then
+if [ $# -lt 3 ]; then
    usage: "storm-config.sh <number> <maxnumber> [<net-interface>]"
    exit 1
 fi
