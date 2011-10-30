@@ -26,7 +26,7 @@ iface $ETHX inet static
    address ${IPBASE}.$(expr 200 + $MYID)
    netmask 255.255.255.0
    gateway ${GATEWAY}
-EOF 
+EOF
 
 # Change hostname
 echo "storm"${MYID} > /etc/hostname
