@@ -1,5 +1,12 @@
 #!/bin/bash
 
+# Configurable parameters
+
+IPBASE="192.168.1"
+GATEWAY="192.168.1.1"
+
+# Parse command line
+
 if [ -z "$1" ]; then
    usage: "storm-config.sh <number> <maxnumber> [<net-interface>]"
    exit 1
@@ -13,25 +20,31 @@ if [ -z $INTERFACE ]; then
   INTERFACE="eth0"
 fi
 
-IPBASE="192.168.1"
-GATEWAY="192.168.1.1"
-
-# Change network configuration
+#
+#  Step 1:
+#  Change network configuration
+#
 cat > /etc/network/interfaces <<EOF
 auto lo
 iface lo inet loopback
 
-auto $ETHX
-iface $ETHX inet static
+auto $INTERFACE
+iface $INTERFACE inet static
    address ${IPBASE}.$(expr 200 + $MYID)
    netmask 255.255.255.0
    gateway ${GATEWAY}
 EOF
 
-# Change hostname
+#
+#  Step 2:
+#  Change hostname
+#
 echo "storm"${MYID} > /etc/hostname
 
-# Change hosts file
+#
+#  Step 3:
+#  Change hosts file
+#
 cat > /etc/hosts << EOF
 127.0.0.1       localhost
 127.0.1.1       storm${MYID}
@@ -49,10 +62,16 @@ ff02::1 ip6-allnodes
 ff02::2 ip6-allrouters
 EOF
 
-# Change zookeeper myid
+#
+#  Step 4:
+#  Change zookeeper myid
+#
 echo $MYID > /etc/zookeeper/conf/myid
 
-# Change zookeeper configuration
+#
+#  Step 5:
+#  Change zookeeper configuration
+#
 cat > /etc/zookeeper/conf/zoo.cfg <<EOF
 tickTime=2000
 initLimit=10
